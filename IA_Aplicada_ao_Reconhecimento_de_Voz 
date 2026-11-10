@@ -1,0 +1,33 @@
+import speech_recognition as sr
+import sounddevice as sd
+import numpy as np
+
+# Configurações de gravação
+TAXA_AMOSTRAGEM = 16000  # 16kHz é ideal para reconhecimento de voz
+DURACAO = 5              # Tempo em segundos para você falar
+
+print("\n[INFO] Preparando para gravar...")
+print("[INFO] Pode falar agora! (Você tem 5 segundos)...")
+
+# Captura o áudio do microfone usando sounddevice
+gravacao = sd.rec(int(DURACAO * TAXA_AMOSTRAGEM), samplerate=TAXA_AMOSTRAGEM, channels=1, dtype='int16')
+sd.wait()  # Aguarda a gravação terminar
+
+print("[INFO] Gravação concluída! Processando a fala...")
+
+# Converte os dados do sounddevice para o formato aceito pelo SpeechRecognition
+dados_audio = gravacao.tobytes()
+audio_data = sr.AudioData(dados_audio, TAXA_AMOSTRAGEM, 2)
+
+# Instancia o reconhecedor
+rec = sr.Recognizer()
+
+try:
+    texto = rec.recognize_google(audio_data, language="pt-BR")
+    print(f"\n✅ Você disse: '{texto}'\n")
+
+except sr.UnknownValueError:
+    print("\n❌ Não entendi o que você falou. Tente falar mais perto ou mais pausadamente.")
+
+except sr.RequestError as e:
+    print(f"\n❌ Erro de conexão com o serviço de reconhecimento: {e}")
