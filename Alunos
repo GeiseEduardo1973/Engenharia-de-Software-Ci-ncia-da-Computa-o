@@ -1,0 +1,34 @@
+import java.util.Random;
+//Classe
+class Pessoa {
+    //Atributos
+    private String nome;
+    private double codigo_identificador;
+    private Random aleatorio;
+    //Métodos
+    public Pessoa (String nome){
+        aleatorio = new Random();
+        this.setNome(nome);
+        this.codigo_identificador = aleatorio.nextDouble();
+    }
+    private void setNome (String nome) {
+        this.nome = nome;
+    }
+    public String getNome () {
+        return this.nome;
+    }
+    public double getCodigoIdentificador (){
+        return this.codigo_identificador;
+    }
+    public static void main(String[] args) {
+        // Cria a Pessoa 1 com o nome "Teste A"
+        Pessoa p1 = new Pessoa("Teste A");
+
+        // Cria a Pessoa 2 com o nome "Teste B"
+        Pessoa p2 = new Pessoa("Teste B");
+
+        // Exibe no formato solicitado pela atividade
+        System.out.println("[Pessoa 1] nome: " + p1.getNome() + ", Código Identificador: " + p1.getCodigoIdentificador());
+        System.out.println("[Pessoa 2] nome: " + p2.getNome() + ", Código Identificador: " + p2.getCodigoIdentificador());
+    }
+}
