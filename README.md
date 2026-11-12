@@ -1,2 +1,2 @@
-# Engenharia-de-Software-Ci-ncia-da-Computa-o
+# Engenharia-de-Software-Ciencia-da-Computacao
 Aqui é onde eu testo meus softwares.
